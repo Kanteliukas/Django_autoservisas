@@ -16,13 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.http import HttpResponse
+from django.conf import settings
+from django.conf.urls.static import static
+from django.views.generic import RedirectView
+
 
 def fake(request):
     return HttpResponse("fake page")
 
-urlpatterns = [
-    path('autoservisas_app/', include('autoservisas_app.urls')),
-    path('admin/', admin.site.urls),
-    path("", fake)
-]
 
+urlpatterns = [
+    path("autoservisas_app/", include("autoservisas_app.urls")),
+    path("admin/", admin.site.urls),
+    path("", RedirectView.as_view(url="autoservisas_app/", permanent=False)),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
