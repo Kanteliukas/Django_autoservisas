@@ -1,0 +1,5 @@
+venv*
+autoservisas/db.sqlite3
+autoservisas/autoservisas/__pycache__*
+autoservisas/autoservisas_app/__pycache__*
+autoservisas/autoservisas/my_settings.py
