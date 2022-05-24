@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.db.models import Sum
 
 
 class CarModel(models.Model):
@@ -53,7 +54,7 @@ class Car(models.Model):
         return f"{self.client} {self.license_plate}"
 
     def display_order(self):
-        return ", ".join(str(order.id) for order in self.orders.all()[:3])
+        return ", ".join(str(order.id) for order in self.orders.all())
 
     display_order.short_description = "Order"
 
@@ -111,9 +112,18 @@ class Order(models.Model):
         return reverse("order-detail", args=[str(self.id)])
 
     def display_service(self):
-        return ", ".join(service.name for service in self.service.all()[:3])
+        return ", ".join(service.name for service in self.service.all())
 
     display_service.short_description = "Service"
+
+    def total_sum(self):
+        orders_amount = self.order_rows.aggregate(Sum('price'))
+        return orders_amount["price__sum"]
+
+    def update_order_amount(self):
+        self.amount = self.total_sum()
+        self.save()
+        return self.amount
 
     class Meta:
         db_table = "Uzsakymas"
@@ -121,17 +131,21 @@ class Order(models.Model):
 
 class OrderRow(models.Model):
 
-    service = models.ForeignKey(Service, on_delete=models.RESTRICT)
-    order = models.ForeignKey(Order, on_delete=models.RESTRICT)
-    date = models.DateField("Data", help_text="Užsakymo įvedimo data")
-    amount = models.FloatField("Suma", help_text="Įveskite užsakymo sumą")
+    service = models.ForeignKey(Service, on_delete=models.RESTRICT, related_name="service")
+    order = models.ForeignKey(Order, on_delete=models.RESTRICT, related_name="order_rows")
+    quantity = models.IntegerField("Kiekis", help_text="Įveskite kiekį", default=0)
+    price = models.FloatField("Kaina", help_text="Įveskite kainą", default=0)
 
     def __str__(self):
-        return f"{self.date} {self.amount}"
+        return f"{self.quantity} {self.price}"
 
     def get_absolute_url(self):
         """Nurodo konkretaus aprašymo galinį adresą"""
         return reverse("orderrow-detail", args=[str(self.id)])
+
+    def update_order_price(self):
+        self.price = self.quantity * self.service.price
+        self.save()
 
     class Meta:
         db_table = "Uzsakymo_eilute"

@@ -3,13 +3,13 @@ from .models import CarModel, Car, Service, Order, OrderRow
 
 
 class OrderRowAdmin(admin.ModelAdmin):
-    list_display = ("order", "service", "amount", "date")
-    list_filter = ("date", "service")
+    list_display = ("order", "service", "quantity", "price")
+    # list_filter = ("date", "service")
     fieldsets = (
-        ("General", {"fields": ("order", "date")}),
-        ("Services", {"fields": ("service", "amount")}),
+        ("General", {"fields": ("order", "price")}),
+        ("Services", {"fields": ("service", "quantity")}),
     )
-
+    
 
 class OrderRowInline(admin.TabularInline):
     model = OrderRow

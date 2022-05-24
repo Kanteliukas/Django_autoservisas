@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container car">
+    <h4>{{ car.make }} {{ car.model }}</h4>
+    </br>
+    <h5>Šio automobilio {{ car.make }} {{ car.model }} informacija:</h5>
+    {% for car_information in car.cars.all %}
+       <li>Klientas: {{ car_information.client }}</li> 
+       <li>Valstybinis numeris: {{ car_information.license_plate }}</li>
+       <li>Automobilio VIN numeris: {{ car_information.vin_number }}</li>
+    {% endfor %}
+    </div>
+{% endblock %}

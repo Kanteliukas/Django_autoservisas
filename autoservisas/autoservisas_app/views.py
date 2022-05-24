@@ -1,27 +1,45 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Car, Service, Order
-
+from .models import Car, CarModel, Service, Order
+from django.shortcuts import render, get_object_or_404
+from django.views import generic
 
 def index(request):
-
-    # Suskaičiuokime keletą pagrindinių objektų
     num_services = Service.objects.all().count()
-    # num_instances = BookInstance.objects.all().count()
 
-    # # Laisvos knygos (tos, kurios turi statusą 'g')
     completed_orders = Order.objects.filter(status__exact="5")
     num_completed_orders = completed_orders.count()
 
-    # # Kiek yra automobilių
     num_cars = Car.objects.count()
 
-    # # perduodame informaciją į šabloną žodyno pavidale:
     context = {
         "num_services": num_services,
         "num_completed_orders": num_completed_orders,
         "num_cars": num_cars,
     }
 
-    # # renderiname index.html, su duomenimis kintamąjame context
     return render(request, "index.html", context=context)
+
+def cars(request):
+    
+    cars = CarModel.objects.all()
+    context = {
+        'cars': cars
+    }
+    return render(request, 'cars.html', context=context)
+
+def car(request, car_id):
+    car = get_object_or_404(CarModel, pk=car_id)
+    return render(request, 'car.html', {'car': car})
+
+class OrderListView(generic.ListView):
+    model = Order
+    template_name = 'order_list.html'
+    context_object_name = 'order_list'
+
+    def get_queryset(self):
+        return Order.objects.all() 
+
+class OrderDetailView(generic.DetailView):
+    model = Order
+    template_name = 'order_detail.html'
