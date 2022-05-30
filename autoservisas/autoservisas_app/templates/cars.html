@@ -1,9 +1,42 @@
-{% extends "base.html" %}
-
-{% block content %}
-  <h1>Automobiliai</h1>
-  <p>Mūsų servise registruotų automobilių sąrašas.</p>
-  {% for car in cars %}
-  <li><a href="{% url 'car' car.id %}">{{car.make}} {{car.model}}</a></li>
+{% extends "base.html" %} {% block content %}
+{% load static %}
+<h1>Automobiliai</h1>
+<p>Mūsų servise registruotų automobilių sąrašas.</p>
+{% if cars %}
+<div class="row">
+    {% for car in cars %}
+    <div class="col-md-4 d-flex align-items-stretch">
+        <div class="card mb-4 shadow-sm">
+            {% if car.car_photo %}
+            <img src="{{ car.car_photo.url }}" class="card-img-top" alt="...">
+            {% else %}
+            <img src="{% static 'img/no-image.png' %}" class="card-img-top">
+            {% endif %}
+            <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">{{ car.model }}</h6>
+                <p class="card-text"><a href="{{ car.id }}">{{ car.make }}</a></p>
+            </div>
+        </div>
+    </div>
     {% endfor %}
+</div>
+{% endif %}
+<div class="container puslapiai">
+    <nav aria-label="...">
+        {% if cars.has_other_pages %}
+        <ul class="pagination pagination-sm justify-content-end">
+            {% for i in cars.paginator.page_range %} {% if cars.number == i %}
+            <li class="page-item active">
+                <a class="page-link" href ">{{ i }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item ">
+                            <a class="page-link " href="?page={{ i }} ">{{ i }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </nav>
+  </div>
 {% endblock %}

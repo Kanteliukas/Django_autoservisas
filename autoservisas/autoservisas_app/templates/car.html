@@ -3,7 +3,8 @@
 {% block content %}
     <div class="container car">
     <h4>{{ car.make }} {{ car.model }}</h4>
-    </br>
+    </br>    
+    <img src="{{ car.car_photo.url }}" style="margin-bottom: 20px;">
     <h5>Šio automobilio {{ car.make }} {{ car.model }} informacija:</h5>
     {% for car_information in car.cars.all %}
        <li>Klientas: {{ car_information.client }}</li> 

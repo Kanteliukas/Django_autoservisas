@@ -18,6 +18,11 @@
           <li><a href="{% url 'index' %}">Pradžia</a></li>
           <li><a href="{% url 'orders' %}">Visi užsakymai</a></li>
           <li><a href="{% url 'cars' %}">Visi automobiliai</a></li>
+          <li>
+            <form action="{% url 'search' %}" method="get" class="form-inline my-2 my-md-0">
+            <input name="query" class="form-control" type="text" placeholder="Paieška">
+            </form>
+          </li>
         </ul>
      {% endblock %}
       </div>

@@ -14,6 +14,9 @@ class CarModel(models.Model):
         max_length=200,
         help_text="Įveskite modelį (pvz. Matiz)",
     )
+    car_photo = models.ImageField(
+        "Automobilio nuotrauka", upload_to="car_photos", null=True
+    )
 
     def __str__(self):
         return f"{self.make} {self.model}"
@@ -117,7 +120,7 @@ class Order(models.Model):
     display_service.short_description = "Service"
 
     def total_sum(self):
-        orders_amount = self.order_rows.aggregate(Sum('price'))
+        orders_amount = self.order_rows.aggregate(Sum("price"))
         return orders_amount["price__sum"]
 
     def update_order_amount(self):
@@ -131,8 +134,12 @@ class Order(models.Model):
 
 class OrderRow(models.Model):
 
-    service = models.ForeignKey(Service, on_delete=models.RESTRICT, related_name="service")
-    order = models.ForeignKey(Order, on_delete=models.RESTRICT, related_name="order_rows")
+    service = models.ForeignKey(
+        Service, on_delete=models.RESTRICT, related_name="service"
+    )
+    order = models.ForeignKey(
+        Order, on_delete=models.RESTRICT, related_name="order_rows"
+    )
     quantity = models.IntegerField("Kiekis", help_text="Įveskite kiekį", default=0)
     price = models.FloatField("Kaina", help_text="Įveskite kainą", default=0)
 
