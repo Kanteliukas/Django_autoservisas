@@ -9,16 +9,17 @@ from django.db.models import Q
 
 def index(request):
     num_services = Service.objects.all().count()
-
     completed_orders = Order.objects.filter(status__exact="5")
     num_completed_orders = completed_orders.count()
-
     num_cars = Car.objects.count()
+    num_visits = request.session.get("num_visits", 1)
+    request.session["num_visits"] = num_visits + 1
 
     context = {
         "num_services": num_services,
         "num_completed_orders": num_completed_orders,
         "num_cars": num_cars,
+        "num_visits": num_visits,
     }
 
     return render(request, "index.html", context=context)
