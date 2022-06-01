@@ -4,12 +4,12 @@ from .models import CarModel, Car, Service, Order, OrderRow
 
 class OrderRowAdmin(admin.ModelAdmin):
     list_display = ("order", "service", "quantity", "price")
-    # list_filter = ("date", "service")
+    # list_filter = ("due_back", "service")
     fieldsets = (
-        ("General", {"fields": ("order", "price")}),
+        ("Order details", {"fields": ("order", "price")}),
         ("Services", {"fields": ("service", "quantity")}),
     )
-    
+
 
 class OrderRowInline(admin.TabularInline):
     model = OrderRow
@@ -19,7 +19,20 @@ class OrderRowInline(admin.TabularInline):
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ("car", "display_service", "amount", "date", "status")
+    list_display = (
+        "car",
+        "display_service",
+        "amount",
+        "date",
+        "status",
+        "due_back",
+        "car_owner",
+    )
+
+    fieldsets = (
+        ("Car details", {"fields": ("car", "car_owner")}),
+        ("Order details", {"fields": ("amount", "date", "status", "due_back")}),
+    )
     inlines = [OrderRowInline]
 
 

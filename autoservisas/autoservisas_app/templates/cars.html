@@ -1,5 +1,4 @@
-{% extends "base.html" %} {% block content %}
-{% load static %}
+{% extends "base.html" %} {% block content %} {% load static %}
 <h1>Automobiliai</h1>
 <p>Mūsų servise registruotų automobilių sąrašas.</p>
 {% if cars %}
@@ -8,10 +7,8 @@
     <div class="col-md-4 d-flex align-items-stretch">
         <div class="card mb-4 shadow-sm">
             {% if car.car_photo %}
-            <img src="{{ car.car_photo.url }}" class="card-img-top" alt="...">
-            {% else %}
-            <img src="{% static 'img/no-image.png' %}" class="card-img-top">
-            {% endif %}
+            <img src="{{ car.car_photo.url }}" class="card-img-top" alt="..."> {% else %}
+            <img src="{% static 'img/no-image.png' %}" class="card-img-top"> {% endif %}
             <div class="card-body">
                 <h6 class="card-subtitle mb-2 text-muted">{{ car.model }}</h6>
                 <p class="card-text"><a href="{{ car.id }}">{{ car.make }}</a></p>

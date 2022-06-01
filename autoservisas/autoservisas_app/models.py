@@ -1,6 +1,9 @@
 from django.db import models
 from django.urls import reverse
 from django.db.models import Sum
+from django.contrib.auth.models import User
+from datetime import date
+from tinymce.models import HTMLField
 
 
 class CarModel(models.Model):
@@ -52,6 +55,7 @@ class Car(models.Model):
         max_length=200,
         help_text="Įveskite kliento vardą",
     )
+    description = HTMLField(default="")
 
     def __str__(self):
         return f"{self.client} {self.license_plate}"
@@ -84,12 +88,30 @@ class Service(models.Model):
         db_table = "Paslauga"
 
 
-class Order(models.Model):
+class OrderQuerySet(models.QuerySet):
+    # def my_orders(self, user):
+    #     return self.filter(car_owner=user)
 
+    def done(self):
+        return self.filter(status__exact="5")
+
+    def order_by_due_back(self):
+        return self.order_by("due_back")
+
+    # def taken_books_read_by_me_ordered_by_due_back(self, user):
+    #     return self.done().my_orders(user).order_by_due_back()
+
+
+class Order(models.Model):
+    objects = OrderQuerySet.as_manager()
+    car_owner = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, blank=True
+    )
     car = models.ForeignKey(Car, on_delete=models.RESTRICT, related_name="orders")
     date = models.DateField("Data", help_text="Užsakymo įvedimo data")
     amount = models.FloatField("Suma", help_text="Įveskite užsakymo sumą")
     service = models.ManyToManyField(Service, through="OrderRow")
+    due_back = models.DateField("Bus grąžinta", null=True, blank=True)
 
     ORDER_STATUS = (
         ("1", "Gautas"),
@@ -127,6 +149,12 @@ class Order(models.Model):
         self.amount = self.total_sum()
         self.save()
         return self.amount
+
+    @property
+    def is_overdue(self):
+        if self.due_back and date.today() > self.due_back:
+            return True
+        return False
 
     class Meta:
         db_table = "Uzsakymas"

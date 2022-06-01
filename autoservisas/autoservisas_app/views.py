@@ -5,6 +5,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def index(request):
@@ -61,6 +62,20 @@ class OrderListView(generic.ListView):
 
     def get_queryset(self):
         return Order.objects.all()
+
+
+class ServiceOrdersByUserListView(LoginRequiredMixin, generic.ListView):
+    model = Order
+    template_name = "my_orders.html"
+    paginate_by = 10
+
+    def get_queryset(self):
+        # Order.objects.taken_books_read_by_me_ordered_by_due_back()
+        # Order.objects.done().order_by_due_back().my_orders()
+        # Order.objects.filter(car_owner=self.request.user).filter(status__exact='p').order_by('due_back')
+        return (
+            Order.objects.filter(car_owner=self.request.user).done().order_by_due_back()
+        )
 
 
 class OrderDetailView(generic.DetailView):

@@ -1,24 +1,22 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
+<h1>{{ order.car }}</h1>
 
-{% block content %}
-  <h1>{{ order.car }}</h1>
-
-  <p><strong>Automobilis:</strong> <a href="{% url 'car' order.car.pk %}">{{ order.car }}</a></p>
-  <p><strong>Suma:</strong> {{ order.amount }}</p> 
-  <p><strong>Data:</strong> {{ order.date }}</p>
-  <p class="{% if order.status == '5' %}text-success{% elif order.status == '4' %}text-danger{% else %}text-warning{% endif %}">
+<p><strong>Automobilis:</strong> <a href="{% url 'car' order.car.pk %}">{{ order.car }}</a></p>
+<p><strong>Suma:</strong> {{ order.amount }}</p>
+<p><strong>Data:</strong> {{ order.date }}</p>
+<p class="{% if order.status == '5' %}text-success{% elif order.status == '4' %}text-danger{% else %}text-warning{% endif %}">
     <strong>Užsakymo statusas:</strong> {{ order.get_status_display }}
-  </p>  
+</p>
 
-  <div style="margin-left:20px;margin-top:20px">
+<div style="margin-left:20px;margin-top:20px">
     <h4>Užsakymo detalės:</h4>
 
-    
+
     {% for order in order.order_rows.all %}
-      <p><strong>Id:</strong> {{ order.id }}</p>
-      <p><strong>Paslauga:</strong> {{ order.service }}</p>
-      <p><strong>Kiekis:</strong> {{ order.quantity }}</p>
-      <p><strong>Kaina:</strong> {{ order.price }}</p>
+    <p><strong>Id:</strong> {{ order.id }}</p>
+    <p><strong>Paslauga:</strong> {{ order.service }}</p>
+    <p><strong>Kiekis:</strong> {{ order.quantity }}</p>
+    <p><strong>Kaina:</strong> {{ order.price }}</p>
     {% endfor %}
-  </div>
+</div>
 {% endblock %}

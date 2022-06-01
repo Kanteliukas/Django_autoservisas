@@ -1,18 +1,14 @@
-{% extends "base.html" %}
-
-{% block content %}
-  <h1>Paieškos pagal "{{query}}" rezultatai:</h1>
-  </br>
-  {% if cars_filter %}
-  <ul>
+{% extends "base.html" %} {% block content %}
+<h1>Paieškos pagal "{{query}}" rezultatai:</h1>
+</br>
+{% if cars_filter %}
+<ul>
     {% for car in cars_filter %}
-      <li>
+    <li>
         <a href="{% url 'car' car.id %}">{{car.car_model}}</a> ({{ car.client }} {{car.license_plate}} {{car.vin_number}})
-      </li>
+    </li>
     {% endfor %}
-  </ul>
-  {% else %}
-    <p>Oops. Nieko neradome :(</p>
-  {% endif %}
-
-  {% endblock %}
+</ul>
+{% else %}
+<p>Oops. Nieko neradome :(</p>
+{% endif %} {% endblock %}
