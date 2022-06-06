@@ -109,7 +109,9 @@ class Order(models.Model):
     )
     car = models.ForeignKey(Car, on_delete=models.RESTRICT, related_name="orders")
     date = models.DateField("Data", help_text="Užsakymo įvedimo data")
-    amount = models.FloatField("Suma", help_text="Įveskite užsakymo sumą")
+    amount = models.FloatField(
+        "Suma", help_text="Įveskite užsakymo sumą", null=True, blank=True
+    )
     service = models.ManyToManyField(Service, through="OrderRow")
     due_back = models.DateField("Bus grąžinta", null=True, blank=True)
 
@@ -145,10 +147,13 @@ class Order(models.Model):
         orders_amount = self.order_rows.aggregate(Sum("price"))
         return orders_amount["price__sum"]
 
-    def update_order_amount(self):
+    # def update_order_amount(self):
+    #     self.amount = self.total_sum()
+    #     return self.amount
+
+    def save(self, *args, **kwargs):
         self.amount = self.total_sum()
-        self.save()
-        return self.amount
+        super().save(*args, **kwargs)
 
     @property
     def is_overdue(self):
@@ -178,9 +183,22 @@ class OrderRow(models.Model):
         """Nurodo konkretaus aprašymo galinį adresą"""
         return reverse("orderrow-detail", args=[str(self.id)])
 
+    @property
     def update_order_price(self):
         self.price = self.quantity * self.service.price
-        self.save()
+        return self.price
+
+    def save(self, *args, **kwargs):
+        self.price = self.update_order_price
+        super().save(*args, **kwargs)
+        self.order.save()
 
     class Meta:
         db_table = "Uzsakymo_eilute"
+
+
+class OrderReview(models.Model):
+    order = models.ForeignKey("Order", on_delete=models.RESTRICT, null=True, blank=True)
+    reviewer = models.ForeignKey(User, on_delete=models.RESTRICT, null=True, blank=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    content = models.TextField("Atsiliepimas", max_length=2000)

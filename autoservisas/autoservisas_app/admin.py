@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CarModel, Car, Service, Order, OrderRow
+from .models import CarModel, Car, Service, Order, OrderRow, OrderReview
 
 
 class OrderRowAdmin(admin.ModelAdmin):
@@ -57,8 +57,13 @@ class ServiceAdmin(admin.ModelAdmin):
     list_filter = ("name", "price")
 
 
+class OrderReviewAdmin(admin.ModelAdmin):
+    list_display = ("order", "date_created", "reviewer", "content")
+
+
 admin.site.register(CarModel, CarModelAdmin)
 admin.site.register(Car, CarAdmin)
 admin.site.register(Service, ServiceAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(OrderRow, OrderRowAdmin)
+admin.site.register(OrderReview, OrderReviewAdmin)

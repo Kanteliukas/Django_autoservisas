@@ -9,4 +9,5 @@ urlpatterns = [
     path("orders/<int:pk>", views.OrderDetailView.as_view(), name="order-detail"),
     path("search/", views.search, name="search"),
     path("myorders/", views.ServiceOrdersByUserListView.as_view(), name="my-orders"),
+    path("register/", views.register, name="register"),
 ]
