@@ -1,28 +1,29 @@
-{% extends "base.html" %} {% block content %}
-<h1>Užsakymų sąrašas</h1>
+{% extends "base.html" %} {% load i18n %} {% block content %}
+<h1>{% trans "Order list" %}</h1>
 {% if order_list %}
 <ul>
     {% for order in order_list %}
+    <img class="rounded-circle" src="{{order.car_owner.profile.picture.url}}">
     <li>
         <a href="{{ order.id }}">{{ order.car }} {{ order.display_service }} {{ order.amount }} ({{order.date}})</a>
     </li>
     {% endfor %}
 </ul>
 {% else %}
-<p>Užsakymų kol kas nėra.</p>
+<p>{% trans "No orders yet." %}</p>
 {% endif %}
 <div class="pagination">
     <span class="step-links">
         {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; pirmas</a>
-            <a href="?page={{ page_obj.previous_page_number }}">atgal</a>
+            <a href="?page=1">&laquo; {% trans "first" %}</a>
+            <a href="?page={{ page_obj.previous_page_number }}">{% trans "back" %}</a>
         {% endif %}
 
         <span class="current">
-            {{ page_obj.number }} iš {{ page_obj.paginator.num_pages }}
+            {% blocktrans %}{{ page_obj.number }} out of {{ page_obj.paginator.num_pages }}{% endblocktrans %}
         </span> {% if page_obj.has_next %}
-    <a href="?page={{ page_obj.next_page_number }}">pirmyn</a>
-    <a href="?page={{ page_obj.paginator.num_pages }}">paskutinis &raquo;</a> {% endif %}
+    <a href="?page={{ page_obj.next_page_number }}">{% trans "forward" %}</a>
+    <a href="?page={{ page_obj.paginator.num_pages }}">{% trans "last" %} &raquo;</a> {% endif %}
     </span>
 </div>
 {% endblock %}

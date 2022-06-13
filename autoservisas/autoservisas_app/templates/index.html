@@ -1,11 +1,11 @@
-{% extends "base.html" %} {% block content %}
-<h1>Autoservisas</h1>
-<p>Sveiki atvykę į autoservisą!</p>
-<p>Mūsų serviso statistika:</p>
+{% extends "base.html" %} {% load i18n %} {% block content %}
+<h1>{% trans "Auto service" %}</h1>
+<p>{% trans "Welcome back to the auto service!" %}</p>
+<p>{% trans "Our auto service stats:" %}</p>
 <ul>
-    <li><strong>Atliekamų paslaugų kiekis:</strong> {{ num_services }}</li>
-    <li><strong>Atliktų užsakymų kiekis:</strong> {{ num_completed_orders }}</li>
-    <li><strong>Automobilių kiekis:</strong> {{ num_cars }}</li>
+    <li><strong>{% trans "Available services amount:" %}</strong> {{ num_services }}</li>
+    <li><strong>{% trans "Finished orders amount:" %}</strong> {{ num_completed_orders }}</li>
+    <li><strong>{% trans "Cars amount:" %}</strong> {{ num_cars }}</li>
 </ul>
-<p>Čia jūs lankotes {{ num_visits }}-ą kartą.</p>
+<p>{% blocktrans %}You visited our page {{ num_visits }} times.{% endblocktrans %}</p>
 {% endblock %}

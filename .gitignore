@@ -2,5 +2,7 @@ venv*
 autoservisas/db.sqlite3
 autoservisas/autoservisas/__pycache__*
 autoservisas/autoservisas_app/__pycache__*
+autoservisas/user_profile/__pycache__*
 autoservisas/autoservisas/my_settings.py
-autoservisas/autoservisas_app/media*
+autoservisas/media**
+!autoservisas/media/user_profile/img/default.png

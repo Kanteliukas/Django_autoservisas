@@ -1,0 +1,500 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-06-13 21:50+0300\n"
+"PO-Revision-Date: 2022-06-13 21:57+0000\n"
+"Last-Translator:   <>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n % 10 == 1 && (n % 100 > 19 || n % 100 < 11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? 1 : n % 1 != 0 ? 2: 3);\n"
+"X-Translated-Using: django-rosetta 0.9.8\n"
+
+#: .\autoservisas_app\models.py:12
+msgid "Make"
+msgstr "Markė"
+
+#: .\autoservisas_app\models.py:14
+msgid "Enter make (e.g. Daewoo)"
+msgstr "Įveskite markę (pvz. Daewoo)"
+
+#: .\autoservisas_app\models.py:17 .\autoservisas_app\models.py:35
+msgid "Model"
+msgstr "Modelis"
+
+#: .\autoservisas_app\models.py:19
+msgid "Enter model (e.g. Matiz)"
+msgstr "Įveskite modelį (pvz. Matiz)"
+
+#: .\autoservisas_app\models.py:22
+msgid "Car photo"
+msgstr "Automobilio nuotrauka"
+
+#: .\autoservisas_app\models.py:31
+msgid "Car"
+msgstr "Automobilis"
+
+#: .\autoservisas_app\models.py:36
+msgid "Models"
+msgstr "Modeliai"
+
+#: .\autoservisas_app\models.py:45
+msgid "Plate_number"
+msgstr "Valstybiniai_numeriai"
+
+#: .\autoservisas_app\models.py:47
+msgid "Enter plate number"
+msgstr "Įveskite valstybinius numerius"
+
+#: .\autoservisas_app\models.py:50
+msgid "VIN"
+msgstr "VIN kodas"
+
+#: .\autoservisas_app\models.py:52
+msgid "Enter car's plate number"
+msgstr "Įveskite automobilio valstybinius numerius"
+
+#: .\autoservisas_app\models.py:55
+msgid "Client"
+msgstr "Klientas"
+
+#: .\autoservisas_app\models.py:57
+msgid "Enter client's name"
+msgstr "Įveskite kliento vardą"
+
+#: .\autoservisas_app\models.py:67
+msgid "Order"
+msgstr "Užsakymas"
+
+#: .\autoservisas_app\models.py:74 .\autoservisas_app\models.py:178
+msgid "Price"
+msgstr "Kaina"
+
+#: .\autoservisas_app\models.py:74
+msgid "Enter service price"
+msgstr "Įveskite paslaugos kainą"
+
+#: .\autoservisas_app\models.py:76
+msgid "Service title"
+msgstr "Paslaugos pavadinimas"
+
+#: .\autoservisas_app\models.py:78
+msgid "Enter service title (e.g. Change wheels)"
+msgstr "Įveskite paslaugos pavadinimą (pvz. Ratų keitimas)"
+
+#: .\autoservisas_app\models.py:112
+#| msgid "Date:"
+msgid "Date"
+msgstr "Data:"
+
+#: .\autoservisas_app\models.py:112
+msgid "Date of received order"
+msgstr "Užsakymo pateikimo data"
+
+#: .\autoservisas_app\models.py:114
+msgid "Amount"
+msgstr "Suma"
+
+#: .\autoservisas_app\models.py:114 .\autoservisas_app\models.py:178
+msgid "Leave empty"
+msgstr "Palikti tuščią"
+
+#: .\autoservisas_app\models.py:117
+msgid "Due_back"
+msgstr "Planuojama grąžinti"
+
+#: .\autoservisas_app\models.py:120
+msgid "Received"
+msgstr "Gautas"
+
+#: .\autoservisas_app\models.py:121
+msgid "Accepted"
+msgstr "Patvirtintas"
+
+#: .\autoservisas_app\models.py:122
+msgid "In progress"
+msgstr "Vykdomas"
+
+#: .\autoservisas_app\models.py:123
+msgid "Overdue"
+msgstr "Vėluojamas"
+
+#: .\autoservisas_app\models.py:124
+msgid "Done"
+msgstr "Atliktas"
+
+#: .\autoservisas_app\models.py:132
+msgid "Status"
+msgstr "Statusas"
+
+#: .\autoservisas_app\models.py:145
+msgid "Service"
+msgstr "Paslauga"
+
+#: .\autoservisas_app\models.py:177
+msgid "Quantity"
+msgstr "Kiekis"
+
+#: .\autoservisas_app\models.py:177
+msgid "Enter quantity"
+msgstr "Įveskite kiekį"
+
+#: .\autoservisas_app\models.py:205
+msgid "Review"
+msgstr "Atsiliepimas"
+
+#: .\autoservisas_app\templates\base.html:6
+#: .\autoservisas_app\templates\base.html:18
+msgid "autoservice"
+msgstr "autoservisas"
+
+#: .\autoservisas_app\templates\base.html:26
+msgid "home"
+msgstr "pradžia"
+
+#: .\autoservisas_app\templates\base.html:29
+msgid "all orders"
+msgstr "visi užsakymai"
+
+#: .\autoservisas_app\templates\base.html:32
+msgid "all cars"
+msgstr "visi automobiliai"
+
+#: .\autoservisas_app\templates\base.html:43
+msgid "my cars"
+msgstr "mano automobiliai"
+
+#: .\autoservisas_app\templates\base.html:44
+msgid "profile"
+msgstr "profilis"
+
+#: .\autoservisas_app\templates\base.html:45
+msgid "logout"
+msgstr "atsijungti"
+
+#: .\autoservisas_app\templates\base.html:47
+msgid "login"
+msgstr "prisijungti"
+
+#: .\autoservisas_app\templates\base.html:49
+msgid "register"
+msgstr "registruotis"
+
+#: .\autoservisas_app\templates\base.html:54
+msgid "search"
+msgstr "paieška"
+
+#: .\autoservisas_app\templates\base.html:58
+msgid "admin"
+msgstr "admin"
+
+#: .\autoservisas_app\templates\car.html:6
+#, python-format
+msgid "Information about car %(car.make)s %(car.model)s:"
+msgstr "Informacija apie automobilį %(car.make)s %(car.model)s:"
+
+#: .\autoservisas_app\templates\car.html:8
+msgid "Client:"
+msgstr "Klientas:"
+
+#: .\autoservisas_app\templates\car.html:9
+msgid "Plate number:"
+msgstr "Valstybiniai numeriai:"
+
+#: .\autoservisas_app\templates\car.html:10
+msgid "Car VIN number:"
+msgstr "Automobilio VIN kodas:"
+
+#: .\autoservisas_app\templates\car.html:11
+msgid "Description:"
+msgstr "Aprašymas:"
+
+#: .\autoservisas_app\templates\cars.html:2
+msgid "Cars"
+msgstr "Automobiliai"
+
+#: .\autoservisas_app\templates\cars.html:3
+msgid "List of cars registered in our shop."
+msgstr "Automobilių sąrašas registruotas mūsų servise."
+
+#: .\autoservisas_app\templates\index.html:2
+msgid "Auto service"
+msgstr "Autoservisas"
+
+#: .\autoservisas_app\templates\index.html:3
+msgid "Welcome back to the auto service!"
+msgstr "Sveiki sugrįžę į autoservisą!"
+
+#: .\autoservisas_app\templates\index.html:4
+msgid "Our auto service stats:"
+msgstr "Mūsų serviso statistika:"
+
+#: .\autoservisas_app\templates\index.html:6
+msgid "Available services amount:"
+msgstr "Atliekamų paslaugų kiekis:"
+
+#: .\autoservisas_app\templates\index.html:7
+msgid "Finished orders amount:"
+msgstr "Atliktų užsakymų kiekis:"
+
+#: .\autoservisas_app\templates\index.html:8
+msgid "Cars amount:"
+msgstr "Automobilių kiekis:"
+
+#: .\autoservisas_app\templates\index.html:10
+#, python-format
+msgid "You visited our page %(num_visits)s times."
+msgstr "Jūsų čia lankotės %(num_visits) s kartą."
+
+#: .\autoservisas_app\templates\my_orders.html:9
+msgid "Due back:"
+msgstr "Bus grąžinta:"
+
+#: .\autoservisas_app\templates\my_orders.html:15
+msgid "You do not have orders at the moment."
+msgstr "Jūs kol kas neturite užsakymų."
+
+#: .\autoservisas_app\templates\order_detail.html:4
+msgid "Car:"
+msgstr "Automobilis:"
+
+#: .\autoservisas_app\templates\order_detail.html:5
+msgid "Amount:"
+msgstr "Suma:"
+
+#: .\autoservisas_app\templates\order_detail.html:6
+msgid "Date:"
+msgstr "Data:"
+
+#: .\autoservisas_app\templates\order_detail.html:8
+msgid "Order status:"
+msgstr "Užsakymo statusas:"
+
+#: .\autoservisas_app\templates\order_detail.html:12
+msgid "Order details:"
+msgstr "Užsakymo informacija:"
+
+#: .\autoservisas_app\templates\order_detail.html:16
+msgid "ID:"
+msgstr "ID:"
+
+#: .\autoservisas_app\templates\order_detail.html:17
+msgid "Service:"
+msgstr "Paslauga:"
+
+#: .\autoservisas_app\templates\order_detail.html:18
+msgid "Quantity:"
+msgstr "Kiekis:"
+
+#: .\autoservisas_app\templates\order_detail.html:19
+msgid "Price:"
+msgstr "Kaina:"
+
+#: .\autoservisas_app\templates\order_detail.html:23
+msgid "Reviews:"
+msgstr "Atsiliepimai:"
+
+#: .\autoservisas_app\templates\order_detail.html:29
+msgid "Order does not have any reviews"
+msgstr "Užsakymas neturi atsiliepimų."
+
+#: .\autoservisas_app\templates\order_detail.html:34
+msgid "Leave review:"
+msgstr "Palikite atsiliepimą:"
+
+#: .\autoservisas_app\templates\order_detail.html:37
+msgid "Save"
+msgstr "Išsaugoti"
+
+#: .\autoservisas_app\templates\order_list.html:2
+msgid "Order list"
+msgstr "Užsakymų sąrašas"
+
+#: .\autoservisas_app\templates\order_list.html:13
+msgid "No orders yet."
+msgstr "Kol kas užsakymų nėra."
+
+#: .\autoservisas_app\templates\order_list.html:18
+msgid "first"
+msgstr "pirmas"
+
+#: .\autoservisas_app\templates\order_list.html:19
+msgid "back"
+msgstr "atgal"
+
+#: .\autoservisas_app\templates\order_list.html:23
+#, python-format
+msgid "%(page_obj.number)s out of %(page_obj.paginator.num_pages)s"
+msgstr "%(page_obj.number)s iš %(page_obj.paginator.num_pages)s"
+
+#: .\autoservisas_app\templates\order_list.html:25
+msgid "forward"
+msgstr "pirmyn"
+
+#: .\autoservisas_app\templates\order_list.html:26
+msgid "last"
+msgstr "paskutinis"
+
+#: .\autoservisas_app\templates\register.html:4
+msgid "Registration"
+msgstr "Registracija"
+
+#: .\autoservisas_app\templates\register.html:8
+msgid "Username"
+msgstr "Vartotojo vardas"
+
+#: .\autoservisas_app\templates\register.html:10
+msgid "Max 150 symbols."
+msgstr "Maksimalus simbolių kiekis: 150"
+
+#: .\autoservisas_app\templates\register.html:13
+msgid "Email"
+msgstr "El. paštas"
+
+#: .\autoservisas_app\templates\register.html:15
+msgid ""
+"Email will not be shared, we need email only for password change purpose"
+msgstr ""
+"El. paštu nebus dalintasi, mums reikia el. pašto tik tam, kai jums reikės "
+"keisti slaptažodį."
+
+#: .\autoservisas_app\templates\register.html:18
+msgid "Password"
+msgstr "Slaptažodis"
+
+#: .\autoservisas_app\templates\register.html:20
+msgid "Not less than 8 symbols. Cannot be only numbers"
+msgstr "Nemažiau 8 simbolių. Negali būti tik skaičiai."
+
+#: .\autoservisas_app\templates\register.html:23
+msgid "Repeat password"
+msgstr "Pakartoti slaptažodį"
+
+#: .\autoservisas_app\templates\register.html:26
+msgid "Register"
+msgstr "Registruotis"
+
+#: .\autoservisas_app\templates\register.html:28
+msgid "If you have already registered,"
+msgstr "Jeigu esate užsiregistravęs,"
+
+#: .\autoservisas_app\templates\register.html:28
+msgid "login."
+msgstr "prisijunkite."
+
+#: .\autoservisas_app\templates\registration\logged_out.html:3
+msgid "Succesfully logged out!"
+msgstr "Sėkmingai atsijungėte!"
+
+#: .\autoservisas_app\templates\registration\logged_out.html:4
+msgid "Login again."
+msgstr "Prisijungti iš naujo."
+
+#: .\autoservisas_app\templates\registration\login.html:2
+msgid "Login error, try again!"
+msgstr "Prisijungimo klaida, bandykite dar kartą!"
+
+#: .\autoservisas_app\templates\registration\login.html:4
+msgid "You do not have authority to access this information. Please login."
+msgstr "Jūs neturite teisų pasiekti šios informacijos. Prisijunkite."
+
+#: .\autoservisas_app\templates\registration\login.html:11
+msgid "User:"
+msgstr "Vartotojas:"
+
+#: .\autoservisas_app\templates\registration\login.html:15
+msgid "Password:"
+msgstr "Slaptažodis:"
+
+#: .\autoservisas_app\templates\registration\login.html:19
+#: .\autoservisas_app\templates\registration\password_reset_complete.html:3
+msgid "Login"
+msgstr "Prisijungti"
+
+#: .\autoservisas_app\templates\registration\login.html:23
+#| msgid "Forgot passwrod?"
+msgid "Forgot password?"
+msgstr "Pamiršote slaptažodį?"
+
+#: .\autoservisas_app\templates\registration\password_reset_complete.html:2
+msgid "Password has been changed!"
+msgstr "Slaptažodis pakeistas!"
+
+#: .\autoservisas_app\templates\registration\password_reset_confirm.html:2
+msgid "Enter new password and repeat the password."
+msgstr "Įveskite naują slaptažodį ir jį pakartokite."
+
+#: .\autoservisas_app\templates\registration\password_reset_confirm.html:8
+msgid "New password:"
+msgstr "Naujas slaptažodis:"
+
+#: .\autoservisas_app\templates\registration\password_reset_confirm.html:13
+msgid "Repeat password:"
+msgstr "Pakartokite slaptažodį:"
+
+#: .\autoservisas_app\templates\registration\password_reset_confirm.html:18
+msgid "Change password"
+msgstr "Pakeisti slaptažodį"
+
+#: .\autoservisas_app\templates\registration\password_reset_confirm.html:23
+msgid "Cannot change password"
+msgstr "Negalima pakeisti slaptažodžio"
+
+#: .\autoservisas_app\templates\registration\password_reset_confirm.html:24
+msgid ""
+"Link for password change expired. Please, initiate password change again."
+msgstr ""
+"Slaptažodžio keitimo nuoroda negalioja. Prašome inicijuoti slaptažodžio "
+"keitimą iš naujo."
+
+#: .\autoservisas_app\templates\registration\password_reset_done.html:2
+msgid "Password reset link was sent to your email!"
+msgstr "Slaptažodžio keitimo nuoroda buvo išsiųsta į jūsų el. paštą!"
+
+#: .\autoservisas_app\templates\registration\password_reset_email.html:3
+#, python-format
+msgid ""
+"\n"
+"Someone ordered password reset. If it was you, follow the link: %(protocol)s://%(domain)s%(the_url)s\n"
+msgstr ""
+"\n"
+"Kažkas užsakė slaptažodžio keitimą. Jeigu tai buvote ne jūs, prašome eiti į šią nuorodą: %(protocol)s://%(domain)s%(the_url)s\n"
+
+#: .\autoservisas_app\templates\registration\password_reset_form.html:5
+msgid "Reset password"
+msgstr "Keisti slaptažodį"
+
+#: .\autoservisas_app\templates\search.html:2
+#, python-format
+msgid "Search results for '%(query)s':"
+msgstr "Paieškos rezultatai '%(query)s':"
+
+#: .\autoservisas_app\templates\search.html:13
+msgid "Oops. We didn't find anything :("
+msgstr "Oops. Nieko neradome :("
+
+#: .\autoservisas_app\views.py:74
+#, python-format
+msgid "Username %s already exists!"
+msgstr "Toks vartotojas jau egzistuoja!"
+
+#: .\autoservisas_app\views.py:80
+#, python-format
+msgid "Email %s already exists!"
+msgstr "Toks el. pašto adresas jau egzistuoja!"
+
+#: .\autoservisas_app\views.py:89
+msgid "Passwords do not match!"
+msgstr "Slaptažodžiai nesutampa!"
+
+#~ msgid "Data"
+#~ msgstr "Data"

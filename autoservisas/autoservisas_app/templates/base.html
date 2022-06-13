@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-{% load static %}
+<!DOCTYPE html>{% load static i18n %}
+<html lang="{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}">
 
 <head>
     {% block title %}
-    <title>Autoservisas</title>{% endblock %}
+    <title>{% trans "autoservice"|capfirst %}</title>{% endblock %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -16,7 +15,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light static-top mb-5 shadow">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="https://svgsilh.com/svg/2386838.svg" style="width:2em; height:2em"> Autoservisas
+                <img src="https://svgsilh.com/svg/2386838.svg" style="width:2em; height:2em"> {% trans "autoservice"|capfirst %}
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -24,13 +23,13 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'index' %}">Pradžia</a>
+                        <a class="nav-link" href="{% url 'index' %}">{% trans "home"|capfirst %}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'orders' %}">Visi užsakymai</a>
+                        <a class="nav-link" href="{% url 'orders' %}">{% trans "all orders"|capfirst %}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'cars' %}">Visi automobiliai</a>
+                        <a class="nav-link" href="{% url 'cars' %}">{% trans "all cars"|capfirst %}</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
@@ -41,25 +40,44 @@
                       <path fill-rule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 00.014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 00.022.004zm9.974.056v-.002.002zM8 7a2 2 0 100-4 2 2 0 000 4zm3-2a3 3 0 11-6 0 3 3 0 016 0z" clip-rule="evenodd"/>
                     </svg> {{ user.get_username }}</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'my-orders'%}">Mano automobiliai</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'logout'%}?next={{request.path}}">Atsijungti</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'my-orders'%}">{% trans "my cars"|capfirst %}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'my-profile' %}">{% trans "profile"|capfirst %}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout'%}?next={% url 'index' %}">{% trans "logout"|capfirst %}</a></li>
                     {% else %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'login'%}?next={{request.path}}">Prisijungti</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}?next={{request.path}}">{% trans "login"|capfirst %}</a></li>
                     {% endif %} {% if not user.is_authenticated %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'register'%}">Registruotis</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">{% trans "register"|capfirst %}</a></li>
+                    {% endif %}
+
+                    <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="get">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Paieška" aria-label="Search" name="query">
+                        <button class="btn btn-outline-info my-2 my-sm-0" type="submit">{% trans "search"|capfirst %}</button>
+                    </form>
+                    </li>
+                    {% if user.is_authenticated and user.is_superuser %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}">{% trans "admin"|capfirst %}</a></li>
                     {% endif %}
                 </ul>
-                <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="get">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Paieška" aria-label="Search" name="query">
-                    <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Ieškoti</button>
+                <form action="{% url 'set_language' %}" method="post">
+                    {% csrf_token %}
+                    <select name="language" class="form-control" onchange="this.form.submit()">
+                      {% get_available_languages as LANGUAGES %}
+                      {% for lang in LANGUAGES %}
+                        <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %} selected=selected{% endif %}>
+                        {{ lang.1 }}</options>
+                      {% endfor %}
+                    </select> {% comment %} <button type="submit" class="btn btn-outline-primary">{% trans "GO" %}</button> {% endcomment %}
                 </form>
             </div>
         </div>
     </nav>
 
     <div class="container">
-        {% block content %}{% endblock %}
-    </div>
+        {% if messages %} {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %} {% endif %} {% block content %}{% endblock %}</div>
 </body>
 
 </html>

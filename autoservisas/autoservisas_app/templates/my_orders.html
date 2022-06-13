@@ -1,16 +1,16 @@
-{% extends "base.html" %} {% block content %}
-<h1>Mano užsakymai</h1>
+{% extends "base.html" %} {% load i18n %} {% block content %}
+<h1>{% trans "My orders" %</h1>
 
 {% if order_list %}
 <ul>
 
     {% for order in order_list %}
     <li class="{% if order.is_overdue %}text-danger{% endif %}">
-        <a href="{% url 'order-detail' order.pk %}">{{order.date}}</a> ({{ order.display_service }} Numatomas grąžinimas: {{ order.due_back }})
+        <a href="{% url 'order-detail' order.pk %}">{{order.date}}</a> ({{ order.display_service }} {% trans "Due back:" %} {{ order.due_back }})
     </li>
     {% endfor %}
 </ul>
 
 {% else %}
-<p>Šiuo metu užsakymų neturite.</p>
+<p>{% trans "You do not have orders at the moment." %}</p>
 {% endif %} {% endblock %}

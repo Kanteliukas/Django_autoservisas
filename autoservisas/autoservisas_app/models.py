@@ -4,21 +4,22 @@ from django.db.models import Sum
 from django.contrib.auth.models import User
 from datetime import date
 from tinymce.models import HTMLField
+from django.utils.translation import gettext_lazy as _
 
 
 class CarModel(models.Model):
     make = models.CharField(
-        "Markė",
+        _("Make"),
         max_length=200,
-        help_text="Įveskite markę (pvz. Daewoo)",
+        help_text=_("Enter make (e.g. Daewoo)"),
     )
     model = models.CharField(
-        "Modelis",
+        _("Model"),
         max_length=200,
-        help_text="Įveskite modelį (pvz. Matiz)",
+        help_text=_("Enter model (e.g. Matiz)"),
     )
     car_photo = models.ImageField(
-        "Automobilio nuotrauka", upload_to="car_photos", null=True
+        _("Car photo"), upload_to="car_photos", null=True
     )
 
     def __str__(self):
@@ -27,12 +28,12 @@ class CarModel(models.Model):
     def display_car(self):
         return ", ".join(str(car.license_plate) for car in self.cars.all()[:3])
 
-    display_car.short_description = "Car"
+    display_car.short_description = _("Car")
 
     class Meta:
         db_table = "Automobilio_modelis"
-        verbose_name = "Model"
-        verbose_name_plural = "Models"
+        verbose_name = _("Model")
+        verbose_name_plural = _("Models")
 
 
 class Car(models.Model):
@@ -41,19 +42,19 @@ class Car(models.Model):
         CarModel, on_delete=models.RESTRICT, related_name="cars"
     )
     license_plate = models.CharField(
-        "Valstybinis_NR",
+        _("Plate_number"),
         max_length=200,
-        help_text="Įveskite valstybinius numerius",
+        help_text=_("Enter plate number"),
     )
     vin_number = models.CharField(
-        "VIN_kodas",
+        _("VIN"),
         max_length=200,
-        help_text="Įveskite automobilio VIN kodą",
+        help_text=_("Enter car's plate number"),
     )
     client = models.CharField(
-        "Klientas",
+        _("Client"),
         max_length=200,
-        help_text="Įveskite kliento vardą",
+        help_text=_("Enter client's name"),
     )
     description = HTMLField(default="")
 
@@ -63,18 +64,18 @@ class Car(models.Model):
     def display_order(self):
         return ", ".join(str(order.id) for order in self.orders.all())
 
-    display_order.short_description = "Order"
+    display_order.short_description = _("Order")
 
     class Meta:
         db_table = "Automobilis"
 
 
 class Service(models.Model):
-    price = models.FloatField("Kaina", help_text="Įveskite užsakymo sumą")
+    price = models.FloatField(_("Price"), help_text=_("Enter service price"))
     name = models.CharField(
-        "Pavadinimas",
+        _("Service title"),
         max_length=200,
-        help_text="Įveskite paslaugos pavadinimą (pvz. Ratų keitimas)",
+        help_text=_("Enter service title (e.g. Change wheels)"),
     )
 
     def __str__(self):
@@ -108,19 +109,19 @@ class Order(models.Model):
         User, on_delete=models.SET_NULL, null=True, blank=True
     )
     car = models.ForeignKey(Car, on_delete=models.RESTRICT, related_name="orders")
-    date = models.DateField("Data", help_text="Užsakymo įvedimo data")
+    date = models.DateField(_("Date"), help_text=_("Date of received order"))
     amount = models.FloatField(
-        "Suma", help_text="Įveskite užsakymo sumą", null=True, blank=True
+        _("Amount"), help_text=_("Leave empty"), null=True, blank=True
     )
     service = models.ManyToManyField(Service, through="OrderRow")
-    due_back = models.DateField("Bus grąžinta", null=True, blank=True)
+    due_back = models.DateField(_("Due_back"), null=True, blank=True)
 
     ORDER_STATUS = (
-        ("1", "Gautas"),
-        ("2", "Patvirtintas"),
-        ("3", "Vykdomas"),
-        ("4", "Vėluojamas"),
-        ("5", "Atliktas"),
+        ("1", _("Received")),
+        ("2", _("Accepted")),
+        ("3", _("In progress")),
+        ("4", _("Overdue")),
+        ("5", _("Done")),
     )
 
     status = models.CharField(
@@ -128,7 +129,7 @@ class Order(models.Model):
         choices=ORDER_STATUS,
         blank=True,
         default="1",
-        help_text="Statusas",
+        help_text=_("Status"),
     )
 
     def __str__(self):
@@ -141,7 +142,7 @@ class Order(models.Model):
     def display_service(self):
         return ", ".join(service.name for service in self.service.all())
 
-    display_service.short_description = "Service"
+    display_service.short_description = _("Service")
 
     def total_sum(self):
         orders_amount = self.order_rows.aggregate(Sum("price"))
@@ -173,8 +174,8 @@ class OrderRow(models.Model):
     order = models.ForeignKey(
         Order, on_delete=models.RESTRICT, related_name="order_rows"
     )
-    quantity = models.IntegerField("Kiekis", help_text="Įveskite kiekį", default=0)
-    price = models.FloatField("Kaina", help_text="Įveskite kainą", default=0)
+    quantity = models.IntegerField(_("Quantity"), help_text=_("Enter quantity"), default=0)
+    price = models.FloatField(_("Price"), help_text=_("Leave empty"), default=0)
 
     def __str__(self):
         return f"{self.quantity} {self.price}"
@@ -201,4 +202,4 @@ class OrderReview(models.Model):
     order = models.ForeignKey("Order", on_delete=models.RESTRICT, null=True, blank=True)
     reviewer = models.ForeignKey(User, on_delete=models.RESTRICT, null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
-    content = models.TextField("Atsiliepimas", max_length=2000)
+    content = models.TextField(_("Review"), max_length=2000)

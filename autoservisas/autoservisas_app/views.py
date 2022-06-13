@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from .forms import OrderReviewForm
 from django.views.generic.edit import FormMixin
+from django.utils.translation import gettext_lazy as _
 
 
 def index(request):
@@ -70,13 +71,13 @@ def register(request):
         if password == password2:
             # tikriname, ar neužimtas username
             if User.objects.filter(username=username).exists():
-                messages.error(request, f"Vartotojo vardas {username} užimtas!")
+                messages.error(request, _('Username %s already exists!') % username)
                 return redirect("register")
             else:
                 # tikriname, ar nėra tokio pat email
                 if User.objects.filter(email=email).exists():
                     messages.error(
-                        request, f"Vartotojas su el. paštu {email} jau užregistruotas!"
+                        request, _('Email %s already exists!') % email
                     )
                     return redirect("register")
                 else:
@@ -85,7 +86,7 @@ def register(request):
                         username=username, email=email, password=password
                     )
         else:
-            messages.error(request, "Slaptažodžiai nesutampa!")
+            messages.error(request, _('Passwords do not match!'))
             return redirect("register")
     return render(request, "register.html")
 

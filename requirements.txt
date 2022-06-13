@@ -1,3 +1,8 @@
-django
-Pillow
+asgiref
+backports.zoneinfo
+Django
+django-crispy-forms
+django-rosetta
 django-tinymce
+Pillow
+sqlparse
