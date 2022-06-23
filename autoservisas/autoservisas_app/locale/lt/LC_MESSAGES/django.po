@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-13 21:50+0300\n"
-"PO-Revision-Date: 2022-06-13 21:57+0000\n"
+"POT-Creation-Date: 2022-06-23 19:03+0300\n"
+"PO-Revision-Date: 2022-06-23 19:05+0000\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -27,7 +27,7 @@ msgstr "Markė"
 msgid "Enter make (e.g. Daewoo)"
 msgstr "Įveskite markę (pvz. Daewoo)"
 
-#: .\autoservisas_app\models.py:17 .\autoservisas_app\models.py:35
+#: .\autoservisas_app\models.py:17 .\autoservisas_app\models.py:33
 msgid "Model"
 msgstr "Modelis"
 
@@ -35,68 +35,59 @@ msgstr "Modelis"
 msgid "Enter model (e.g. Matiz)"
 msgstr "Įveskite modelį (pvz. Matiz)"
 
-#: .\autoservisas_app\models.py:22
+#: .\autoservisas_app\models.py:21
 msgid "Car photo"
 msgstr "Automobilio nuotrauka"
 
-#: .\autoservisas_app\models.py:31
+#: .\autoservisas_app\models.py:29
 msgid "Car"
 msgstr "Automobilis"
 
-#: .\autoservisas_app\models.py:36
+#: .\autoservisas_app\models.py:34
 msgid "Models"
 msgstr "Modeliai"
 
-#: .\autoservisas_app\models.py:45
+#: .\autoservisas_app\models.py:43
 msgid "Plate_number"
 msgstr "Valstybiniai_numeriai"
 
-#: .\autoservisas_app\models.py:47
+#: .\autoservisas_app\models.py:45
 msgid "Enter plate number"
 msgstr "Įveskite valstybinius numerius"
 
-#: .\autoservisas_app\models.py:50
+#: .\autoservisas_app\models.py:48
 msgid "VIN"
 msgstr "VIN kodas"
 
-#: .\autoservisas_app\models.py:52
+#: .\autoservisas_app\models.py:50
 msgid "Enter car's plate number"
 msgstr "Įveskite automobilio valstybinius numerius"
 
-#: .\autoservisas_app\models.py:55
-msgid "Client"
-msgstr "Klientas"
-
-#: .\autoservisas_app\models.py:57
-msgid "Enter client's name"
-msgstr "Įveskite kliento vardą"
-
-#: .\autoservisas_app\models.py:67
+#: .\autoservisas_app\models.py:62
 msgid "Order"
 msgstr "Užsakymas"
 
-#: .\autoservisas_app\models.py:74 .\autoservisas_app\models.py:178
+#: .\autoservisas_app\models.py:69 .\autoservisas_app\models.py:180
 msgid "Price"
 msgstr "Kaina"
 
-#: .\autoservisas_app\models.py:74
+#: .\autoservisas_app\models.py:69
 msgid "Enter service price"
 msgstr "Įveskite paslaugos kainą"
 
-#: .\autoservisas_app\models.py:76
+#: .\autoservisas_app\models.py:71
 msgid "Service title"
 msgstr "Paslaugos pavadinimas"
 
-#: .\autoservisas_app\models.py:78
+#: .\autoservisas_app\models.py:73
 msgid "Enter service title (e.g. Change wheels)"
 msgstr "Įveskite paslaugos pavadinimą (pvz. Ratų keitimas)"
 
-#: .\autoservisas_app\models.py:112
-#| msgid "Date:"
+#: .\autoservisas_app\models.py:111
 msgid "Date"
 msgstr "Data:"
 
-#: .\autoservisas_app\models.py:112
+#: .\autoservisas_app\models.py:111
 msgid "Date of received order"
 msgstr "Užsakymo pateikimo data"
 
@@ -104,7 +95,7 @@ msgstr "Užsakymo pateikimo data"
 msgid "Amount"
 msgstr "Suma"
 
-#: .\autoservisas_app\models.py:114 .\autoservisas_app\models.py:178
+#: .\autoservisas_app\models.py:114 .\autoservisas_app\models.py:180
 msgid "Leave empty"
 msgstr "Palikti tuščią"
 
@@ -140,15 +131,15 @@ msgstr "Statusas"
 msgid "Service"
 msgstr "Paslauga"
 
-#: .\autoservisas_app\models.py:177
+#: .\autoservisas_app\models.py:178
 msgid "Quantity"
 msgstr "Kiekis"
 
-#: .\autoservisas_app\models.py:177
+#: .\autoservisas_app\models.py:178
 msgid "Enter quantity"
 msgstr "Įveskite kiekį"
 
-#: .\autoservisas_app\models.py:205
+#: .\autoservisas_app\models.py:207
 msgid "Review"
 msgstr "Atsiliepimas"
 
@@ -170,30 +161,35 @@ msgid "all cars"
 msgstr "visi automobiliai"
 
 #: .\autoservisas_app\templates\base.html:43
-msgid "my cars"
-msgstr "mano automobiliai"
+#: .\autoservisas_app\templates\my_orders.html:2
+msgid "my orders"
+msgstr "mano užsakymai"
 
 #: .\autoservisas_app\templates\base.html:44
+msgid "new"
+msgstr "naujas"
+
+#: .\autoservisas_app\templates\base.html:45
 msgid "profile"
 msgstr "profilis"
 
-#: .\autoservisas_app\templates\base.html:45
+#: .\autoservisas_app\templates\base.html:46
 msgid "logout"
 msgstr "atsijungti"
 
-#: .\autoservisas_app\templates\base.html:47
+#: .\autoservisas_app\templates\base.html:48
 msgid "login"
 msgstr "prisijungti"
 
-#: .\autoservisas_app\templates\base.html:49
+#: .\autoservisas_app\templates\base.html:50
 msgid "register"
 msgstr "registruotis"
 
-#: .\autoservisas_app\templates\base.html:54
+#: .\autoservisas_app\templates\base.html:55
 msgid "search"
 msgstr "paieška"
 
-#: .\autoservisas_app\templates\base.html:58
+#: .\autoservisas_app\templates\base.html:59
 msgid "admin"
 msgstr "admin"
 
@@ -255,11 +251,11 @@ msgstr "Automobilių kiekis:"
 msgid "You visited our page %(num_visits)s times."
 msgstr "Jūsų čia lankotės %(num_visits) s kartą."
 
-#: .\autoservisas_app\templates\my_orders.html:9
+#: .\autoservisas_app\templates\my_orders.html:14
 msgid "Due back:"
 msgstr "Bus grąžinta:"
 
-#: .\autoservisas_app\templates\my_orders.html:15
+#: .\autoservisas_app\templates\my_orders.html:23
 msgid "You do not have orders at the moment."
 msgstr "Jūs kol kas neturite užsakymų."
 
@@ -421,7 +417,6 @@ msgid "Login"
 msgstr "Prisijungti"
 
 #: .\autoservisas_app\templates\registration\login.html:23
-#| msgid "Forgot passwrod?"
 msgid "Forgot password?"
 msgstr "Pamiršote slaptažodį?"
 
@@ -482,19 +477,89 @@ msgstr "Paieškos rezultatai '%(query)s':"
 msgid "Oops. We didn't find anything :("
 msgstr "Oops. Nieko neradome :("
 
-#: .\autoservisas_app\views.py:74
+#: .\autoservisas_app\templates\user_order.html:5
+msgid "my order"
+msgstr "mano užsakymas"
+
+#: .\autoservisas_app\templates\user_order.html:9
+msgid "car owner"
+msgstr "automobilio savininkas"
+
+#: .\autoservisas_app\templates\user_order.html:14
+msgid "quantity"
+msgstr "kiekis"
+
+#: .\autoservisas_app\templates\user_order.html:15
+msgid "price"
+msgstr "kaina"
+
+#: .\autoservisas_app\templates\user_order.html:19
+msgid "return term"
+msgstr "grąžinimo terminas"
+
+#: .\autoservisas_app\templates\user_order.html:23
+msgid "edit"
+msgstr "redaguoti"
+
+#: .\autoservisas_app\templates\user_order.html:26
+#: .\autoservisas_app\templates\user_order_delete.html:10
+msgid "delete"
+msgstr "ištrinti"
+
+#: .\autoservisas_app\templates\user_order_delete.html:5
+msgid "deleting order"
+msgstr "užsakymas trinamas"
+
+#: .\autoservisas_app\templates\user_order_delete.html:7
+msgid "confirm that you are deleting this order"
+msgstr "patvirtinkit, kad norite ištrinti šį įrašą"
+
+#: .\autoservisas_app\templates\user_order_delete.html:11
+msgid "cancel"
+msgstr "atšaukti"
+
+#: .\autoservisas_app\templates\user_order_form.html:5
+#| msgid "my order"
+msgid "making order"
+msgstr "kuriamas užsakymas"
+
+#: .\autoservisas_app\templates\user_order_form.html:9
+#| msgid "my order"
+msgid "new order"
+msgstr "naujas užsakymas"
+
+#: .\autoservisas_app\templates\user_order_form.html:14
+#| msgid "all orders"
+msgid "update order"
+msgstr "atnaujinti užsakymą"
+
+#: .\autoservisas_app\templates\user_order_form.html:16
+#| msgid "all orders"
+msgid "create order"
+msgstr "sukurti užsakymą"
+
+#: .\autoservisas_app\views.py:75
 #, python-format
 msgid "Username %s already exists!"
 msgstr "Toks vartotojas jau egzistuoja!"
 
-#: .\autoservisas_app\views.py:80
+#: .\autoservisas_app\views.py:81
 #, python-format
 msgid "Email %s already exists!"
 msgstr "Toks el. pašto adresas jau egzistuoja!"
 
-#: .\autoservisas_app\views.py:89
+#: .\autoservisas_app\views.py:90
 msgid "Passwords do not match!"
 msgstr "Slaptažodžiai nesutampa!"
+
+#~ msgid "Client"
+#~ msgstr "Klientas"
+
+#~ msgid "Enter client's name"
+#~ msgstr "Įveskite kliento vardą"
+
+#~ msgid "my cars"
+#~ msgstr "mano automobiliai"
 
 #~ msgid "Data"
 #~ msgstr "Data"

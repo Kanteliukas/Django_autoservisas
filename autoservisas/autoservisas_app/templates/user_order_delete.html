@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% load i18n %} {% block content %}
+<div class="container">
+    <h1>{% trans "deleting order"|capfirst %}</h1>
+    <form method="post" action="">
+        {% trans "confirm that you are deleting this order"|capfirst %} {% csrf_token %}
+        <div class="form-group">
+            <button class="btn btn-danger">{% trans "delete"|capfirst %}</button>
+            <a class="btn btn-secondary" href="{% url 'my-orders' %}">{% trans "cancel"|capfirst %}</a>
+        </div>
+    </form>
+</div>
+{% endblock content %}

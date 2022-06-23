@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% load i18n crispy_forms_tags %} {% block content %}
+<div class="container">
+    <h1>{% trans "making order"|capfirst %}</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">{% trans "new order"|capfirst %}</legend>
+            {{ form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            {% if is_update %}
+            <button class="btn btn-primary">{% trans "update order"|capfirst %}</button> {% else %}
+            <button class="btn btn-primary">{% trans "create order"|capfirst %}</button> {% endif %}
+        </div>
+    </form>
+</div>
+{% endblock content %}

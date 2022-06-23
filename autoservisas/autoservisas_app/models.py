@@ -18,9 +18,7 @@ class CarModel(models.Model):
         max_length=200,
         help_text=_("Enter model (e.g. Matiz)"),
     )
-    car_photo = models.ImageField(
-        _("Car photo"), upload_to="car_photos", null=True
-    )
+    car_photo = models.ImageField(_("Car photo"), upload_to="car_photos", null=True)
 
     def __str__(self):
         return f"{self.make} {self.model}"
@@ -51,11 +49,8 @@ class Car(models.Model):
         max_length=200,
         help_text=_("Enter car's plate number"),
     )
-    client = models.CharField(
-        _("Client"),
-        max_length=200,
-        help_text=_("Enter client's name"),
-    )
+    client = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+
     description = HTMLField(default="")
 
     def __str__(self):
@@ -99,6 +94,9 @@ class OrderQuerySet(models.QuerySet):
     def order_by_due_back(self):
         return self.order_by("due_back")
 
+    def in_progress_or_done(self):
+        return self.filter(models.Q(status__exact="5") | models.Q(status__exact="3"))
+
     # def taken_books_read_by_me_ordered_by_due_back(self, user):
     #     return self.done().my_orders(user).order_by_due_back()
 
@@ -109,7 +107,9 @@ class Order(models.Model):
         User, on_delete=models.SET_NULL, null=True, blank=True
     )
     car = models.ForeignKey(Car, on_delete=models.RESTRICT, related_name="orders")
-    date = models.DateField(_("Date"), help_text=_("Date of received order"))
+    date = models.DateField(
+        _("Date"), help_text=_("Date of received order"), auto_now_add=True
+    )
     amount = models.FloatField(
         _("Amount"), help_text=_("Leave empty"), null=True, blank=True
     )
@@ -172,9 +172,11 @@ class OrderRow(models.Model):
         Service, on_delete=models.RESTRICT, related_name="service"
     )
     order = models.ForeignKey(
-        Order, on_delete=models.RESTRICT, related_name="order_rows"
+        Order, on_delete=models.CASCADE, related_name="order_rows"
     )
-    quantity = models.IntegerField(_("Quantity"), help_text=_("Enter quantity"), default=0)
+    quantity = models.IntegerField(
+        _("Quantity"), help_text=_("Enter quantity"), default=0
+    )
     price = models.FloatField(_("Price"), help_text=_("Leave empty"), default=0)
 
     def __str__(self):

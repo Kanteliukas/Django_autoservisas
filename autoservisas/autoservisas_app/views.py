@@ -1,16 +1,17 @@
-from django.shortcuts import render, get_object_or_404, redirect, reverse
-from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Car, CarModel, Service, Order
 from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.forms import User
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
-from .forms import OrderReviewForm
-from django.views.generic.edit import FormMixin
+from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
+from .forms import OrderReviewForm, OrderForm
+from django.views.generic.edit import FormMixin
+from datetime import date, timedelta
 
 
 def index(request):
@@ -71,14 +72,12 @@ def register(request):
         if password == password2:
             # tikriname, ar neužimtas username
             if User.objects.filter(username=username).exists():
-                messages.error(request, _('Username %s already exists!') % username)
+                messages.error(request, _("Username %s already exists!") % username)
                 return redirect("register")
             else:
                 # tikriname, ar nėra tokio pat email
                 if User.objects.filter(email=email).exists():
-                    messages.error(
-                        request, _('Email %s already exists!') % email
-                    )
+                    messages.error(request, _("Email %s already exists!") % email)
                     return redirect("register")
                 else:
                     # jeigu viskas tvarkoje, sukuriame naują vartotoją
@@ -86,14 +85,14 @@ def register(request):
                         username=username, email=email, password=password
                     )
         else:
-            messages.error(request, _('Passwords do not match!'))
+            messages.error(request, _("Passwords do not match!"))
             return redirect("register")
     return render(request, "register.html")
 
 
 class OrderListView(generic.ListView):
     model = Order
-    paginate_by = 2
+    paginate_by = 10
     template_name = "order_list.html"
     context_object_name = "order_list"
 
@@ -103,6 +102,7 @@ class OrderListView(generic.ListView):
 
 class ServiceOrdersByUserListView(LoginRequiredMixin, generic.ListView):
     model = Order
+    context_object_name = "orders"
     template_name = "my_orders.html"
     paginate_by = 10
 
@@ -111,8 +111,15 @@ class ServiceOrdersByUserListView(LoginRequiredMixin, generic.ListView):
         # Order.objects.done().order_by_due_back().my_orders()
         # Order.objects.filter(car_owner=self.request.user).filter(status__exact='p').order_by('due_back')
         return (
-            Order.objects.filter(car_owner=self.request.user).done().order_by_due_back()
+            Order.objects.filter(car_owner=self.request.user)
+            .in_progress_or_done()
+            .order_by_due_back()
         )
+
+
+class OrderByUserDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Order
+    template_name = "user_order.html"
 
 
 class OrderDetailView(FormMixin, generic.DetailView):
@@ -125,7 +132,7 @@ class OrderDetailView(FormMixin, generic.DetailView):
 
     # nurodome, kur atsidursime komentaro sėkmės atveju.
     def get_success_url(self):
-        return reverse("order-detail", kwargs={"pk": self.object.id})
+        return reverse_lazy("order-detail", kwargs={"pk": self.object.id})
 
     # standartinis post metodo perrašymas, naudojant FormMixin, galite kopijuoti tiesiai į savo projektą.
     def post(self, request, *args, **kwargs):
@@ -142,3 +149,78 @@ class OrderDetailView(FormMixin, generic.DetailView):
         form.instance.reviewer = self.request.user
         form.save()
         return super(OrderDetailView, self).form_valid(form)
+
+
+class OrderByUserCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Order
+    form_class = OrderForm
+    success_url = reverse_lazy("my-orders")
+    template_name = "user_order_form.html"
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields["car"].queryset = Car.objects.filter(client=self.request.user)
+        return form
+
+    def form_valid(self, form):
+        form.instance.car_owner = self.request.user
+        form.instance.status = "3"
+        return super().form_valid(form)
+
+    # def get_initial(self):
+    #     initial = super().get_initial()
+    #     order_id = self.request.GET.get('order_id')
+    #     if order_id:
+    #         initial['order'] = order_id
+    #     initial['due_back'] = date.today() + timedelta(days=3)
+    #     return initial
+
+
+class OrderByUserUpdateView(
+    LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView
+):
+    model = Order
+    form_class = OrderForm
+    success_url = reverse_lazy("my-orders")
+    template_name = "user_order_form.html"
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields["car"].queryset = Car.objects.filter(client=self.request.user)
+        return form
+
+    def form_valid(self, form):
+        form.instance.car_owner = self.request.user
+        form.instance.status = "3"
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["is_update"] = True
+        return context
+
+    # def get_initial(self):
+    #     initial = super().get_initial()
+    #     initial['due_back'] = date.today() + timedelta(days=7)
+    #     return initial
+
+    def test_func(self):
+        return (
+            self.request.user == self.get_object().car_owner
+            and self.get_object().status != "5"
+        )
+
+
+class OrderByUserDeleteView(
+    LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView
+):
+    model = Order
+    success_url = reverse_lazy("my-orders")
+    template_name = "user_order_delete.html"
+
+    def form_valid(self, form):
+        messages.success(self.request, f'{_("Order deleted").capitalize()}')
+        return super().form_valid(form)
+
+    def test_func(self):
+        return self.request.user == self.get_object().car_owner

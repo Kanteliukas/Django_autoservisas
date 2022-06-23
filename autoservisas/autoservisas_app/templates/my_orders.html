@@ -1,12 +1,15 @@
 {% extends "base.html" %} {% load i18n %} {% block content %}
-<h1>{% trans "My orders" %</h1>
+<h1>{% trans "my orders"|capfirst %}</h1>
 
-{% if order_list %}
+{% if orders %}
 <ul>
 
-    {% for order in order_list %}
+    {% for order in orders %}
     <li class="{% if order.is_overdue %}text-danger{% endif %}">
-        <a href="{% url 'order-detail' order.pk %}">{{order.date}}</a> ({{ order.display_service }} {% trans "Due back:" %} {{ order.due_back }})
+        <a href="{% url 'my-order' order.pk %}">
+            <img class="rounded-circle" src="{{ order.car_owner.profile.picture.url }}" width="50"> {{ order.car_owner }}
+        </a>
+        <a href="{% url 'order-detail' order.pk %}">{{order.date}}</a> ({{ order.display_service }} {% if order.due_back != None %} {% trans "Due back:" %} {{ order.due_back }}) {% else %} ) {% endif %}
     </li>
     {% endfor %}
 </ul>

@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% load i18n %} {% block content %}
+<div class="container">
+    <h1>{% trans "my order"|capfirst %}</h1>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <img class="rounded-circle" src="{{ object.reader.profile.picture.url }}" width="50"> {% trans "car owner"|capfirst %}: {{ object.car_owner }}<br>
+        </li>
+        {% for order in object.order_rows.all %}
+        <li class="list-group-item">
+            <h3>{{ order.service }}</h3>
+            <h5>{% trans "quantity"|capfirst %}: {{ order.quantity }}</h5>
+            <h5>{% trans "price"|capfirst %}: {{ order.price }}</h5>
+        </li>
+        {% endfor %}
+        <li class="list-group-item {% if object.is_overdue %}text-danger{% endif %}">
+            {% trans "return term"|capfirst %}: {{ object.due_back }}
+        </li>
+        <li class="list-group-item">
+            {% if object.car_owner == user and object.status != "5" %}
+            <a class="btn btn-primary" href="{% url 'my-order-update' object.id %}">{% trans "edit"|capfirst %}</a> {% endif %} {% if object.car_owner == user %}
+            <a class="btn btn-warning" href="{% url 'my-order-delete' object.id %}">{% trans "delete"|capfirst %}</a> {% endif %}
+        </li>
+
+    </ul>
+</div>
+{% endblock content %}
